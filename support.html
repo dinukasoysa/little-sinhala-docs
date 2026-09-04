@@ -8,9 +8,9 @@
     :root {
       color-scheme: light dark;
       /* Palette drawn from the app icon + SemanticColor tokens */
-      --green:        #4CAD40; /* SemanticColor.primary — leaf green */
+      --green:        #57A24D; /* softened leaf green (from SemanticColor.primary) */
       --green-bright: #5FBF17; /* icon background */
-      --green-dark:   #38851E; /* SemanticColor.primaryDark */
+      --green-dark:   #3C7A33; /* softened SemanticColor.primaryDark */
       --brown:        #A05C4E; /* owl body */
       --brown-dark:   #5C2318; /* owl outline */
       --gold:         #F0BF1F; /* SemanticColor.celebration — beak/feet */
@@ -32,7 +32,7 @@
     .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.25rem 4rem; }
 
     .banner {
-      background: linear-gradient(160deg, var(--green-bright) 0%, var(--green) 55%, var(--green-dark) 100%);
+      background: linear-gradient(160deg, var(--green) 0%, var(--green-dark) 100%);
       color: #fff; text-align: center;
       padding: 2.5rem 1.25rem 2rem;
       border-bottom: 6px solid var(--gold);
