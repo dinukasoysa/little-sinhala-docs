@@ -5,70 +5,162 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Little Sinhala — Support</title>
   <style>
-    :root { color-scheme: light dark; }
+    :root {
+      color-scheme: light dark;
+      /* Palette drawn from the app icon + SemanticColor tokens */
+      --green:        #4CAD40; /* SemanticColor.primary — leaf green */
+      --green-bright: #5FBF17; /* icon background */
+      --green-dark:   #38851E; /* SemanticColor.primaryDark */
+      --brown:        #A05C4E; /* owl body */
+      --brown-dark:   #5C2318; /* owl outline */
+      --gold:         #F0BF1F; /* SemanticColor.celebration — beak/feet */
+      --amber:        #E68C2E; /* SemanticColor.gentleCorrection */
+      --cream:        #FBF3DF; /* owl eye patch, warm surface */
+      --cream-border: #ECD9AF;
+      --sky:          #3F94D1; /* SemanticColor.accent */
+      --ink:          #3A2A22; /* warm near-black text */
+      --muted:        #8a7a70;
+      --page-bg:      #FCF9F1;
+      --card-bg:      #ffffff;
+    }
+    * { box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
-      color: #1c1c1e; background: #fff;
+      line-height: 1.6; margin: 0;
+      color: var(--ink); background: var(--page-bg);
     }
-    @media (prefers-color-scheme: dark) { body { color: #f2f2f7; background: #1c1c1e; } a { color: #6cb4ff; } }
-    h1 { font-size: 1.9rem; }
-    h2 { font-size: 1.2rem; margin-top: 2rem; }
-    .lead { font-size: 1.1rem; }
-    footer { margin-top: 3rem; font-size: 0.9rem; color: #8a8a8e; }
-    details { margin: 0.5rem 0; }
-    summary { font-weight: 600; cursor: pointer; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+    .banner {
+      background: linear-gradient(160deg, var(--green-bright) 0%, var(--green) 55%, var(--green-dark) 100%);
+      color: #fff; text-align: center;
+      padding: 2.5rem 1.25rem 2rem;
+      border-bottom: 6px solid var(--gold);
+    }
+    .banner .owl { font-size: 3rem; line-height: 1; }
+    .banner h1 { font-size: 2rem; margin: 0.5rem 0 0.25rem; color: #fff; }
+    .banner .tagline { color: rgba(255,255,255,0.9); font-size: 0.95rem; margin: 0; }
+
+    .lead {
+      font-size: 1.12rem; background: var(--cream);
+      border-left: 5px solid var(--gold);
+      border-radius: 10px; padding: 1rem 1.25rem; margin: 1.75rem 0 0;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--cream-border);
+      border-radius: 16px;
+      padding: 1.5rem 1.5rem;
+      margin-top: 1.75rem;
+      box-shadow: 0 2px 10px rgba(92,35,24,0.06);
+    }
+    h2 {
+      font-size: 1.25rem; margin: 0 0 0.75rem; color: var(--brown-dark);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    h2::before {
+      content: ""; width: 12px; height: 12px; border-radius: 50%;
+      background: var(--green); flex: none;
+    }
+    a { color: var(--green-dark); font-weight: 600; }
+    a:hover { color: var(--amber); }
+
+    details {
+      margin: 0.6rem 0; border: 1px solid var(--cream-border);
+      border-radius: 12px; padding: 0.25rem 1rem; background: var(--card-bg);
+    }
+    details[open] { border-color: var(--green); }
+    summary {
+      font-weight: 600; cursor: pointer; padding: 0.65rem 0;
+      color: var(--brown-dark); list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before {
+      content: "▸"; color: var(--green); font-weight: 700;
+      display: inline-block; margin-right: 0.5rem; transition: transform 0.15s ease;
+    }
+    details[open] summary::before { transform: rotate(90deg); }
+    details p { margin-top: 0; padding-bottom: 0.5rem; }
+    strong { color: var(--brown-dark); }
+
+    footer {
+      margin-top: 2.5rem; font-size: 0.9rem; color: var(--muted);
+      text-align: center; border-top: 1px solid var(--cream-border); padding-top: 1.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #F3E9DA; --muted: #b6a596;
+        --page-bg: #1E1611; --card-bg: #2A211A;
+        --cream: #3A2C22; --cream-border: #4a382c;
+      }
+      h2, summary { color: var(--gold); }
+      a { color: #8fd07f; }
+      a:hover { color: var(--gold); }
+      strong { color: var(--cream); }
+    }
   </style>
 </head>
 <body>
-  <h1>Little Sinhala — Support</h1>
-  <p class="lead">
-    Little Sinhala teaches Sinhala to young children through pictures, sound, and gentle practice.
-    Here's how to get help.
-  </p>
+  <header class="banner">
+    <div class="owl" role="img" aria-label="Owl mascot">🦉</div>
+    <h1>Support</h1>
+    <p class="tagline">Little Sinhala</p>
+  </header>
 
-  <h2>Contact</h2>
-  <p>
-    Email <a href="mailto:purges.84.tundra@icloud.com">purges.84.tundra@icloud.com</a>
-    and we'll get back to you. Please include your device model and iOS version if you're reporting
-    a problem.
-  </p>
+  <div class="wrap">
+    <p class="lead">
+      Little Sinhala teaches Sinhala to young children through pictures, sound, and gentle practice.
+      Here's how to get help.
+    </p>
 
-  <h2>Common questions</h2>
+    <div class="card">
+      <h2>Contact</h2>
+      <p>
+        Email <a href="mailto:purges.84.tundra@icloud.com">purges.84.tundra@icloud.com</a>
+        and we'll get back to you. Please include your device model and iOS version if you're reporting
+        a problem.
+      </p>
+    </div>
 
-  <details>
-    <summary>How do I reach the Parent area?</summary>
-    <p>Tap the <strong>Parent</strong> button on the home screen and solve the short maths question.
-    This keeps parent settings out of a young child's reach.</p>
-  </details>
+    <div class="card">
+      <h2>Common questions</h2>
 
-  <details>
-    <summary>Does my child need an account or the internet?</summary>
-    <p>No account is needed. The app works offline once lessons are downloaded, and it never asks
-    your child to sign in.</p>
-  </details>
+      <details>
+        <summary>How do I reach the Parent area?</summary>
+        <p>Tap the <strong>Parent</strong> button on the home screen and solve the short maths question.
+        This keeps parent settings out of a young child's reach.</p>
+      </details>
 
-  <details>
-    <summary>Is my child's data private?</summary>
-    <p>Yes. The app collects nothing and sends nothing off the device. See our
-    <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
-  </details>
+      <details>
+        <summary>Does my child need an account or the internet?</summary>
+        <p>No account is needed. The app works offline once lessons are downloaded, and it never asks
+        your child to sign in.</p>
+      </details>
 
-  <details>
-    <summary>Why does the app ask for the microphone?</summary>
-    <p>Some optional activities let your child say a word aloud and get a friendly star rating. The
-    audio is scored on the device and is never saved or sent anywhere. If you decline, your child
-    gets a listening or matching activity instead.</p>
-  </details>
+      <details>
+        <summary>Is my child's data private?</summary>
+        <p>Yes. The app collects nothing and sends nothing off the device. See our
+        <a href="privacy-policy.html">Privacy Policy</a> for details.</p>
+      </details>
 
-  <details>
-    <summary>How do I set a daily time limit?</summary>
-    <p>Open the <strong>Parent</strong> area and set a daily limit. When the time is up, the app
-    shows a gentle break screen.</p>
-  </details>
+      <details>
+        <summary>Why does the app ask for the microphone?</summary>
+        <p>Some optional activities let your child say a word aloud and get a friendly star rating. The
+        audio is scored on the device and is never saved or sent anywhere. If you decline, your child
+        gets a listening or matching activity instead.</p>
+      </details>
 
-  <footer>
-    &copy; 2026 Little Sinhala. See also our <a href="privacy-policy.html">Privacy Policy</a>.
-  </footer>
+      <details>
+        <summary>How do I set a daily time limit?</summary>
+        <p>Open the <strong>Parent</strong> area and set a daily limit. When the time is up, the app
+        shows a gentle break screen.</p>
+      </details>
+    </div>
+
+    <footer>
+      &copy; 2026 Little Sinhala. See also our <a href="privacy-policy.html">Privacy Policy</a>.
+    </footer>
+  </div>
 </body>
 </html>
