@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Little Sinhala (private)</title>
+<style>body{font:18px system-ui;background:#fff8ec;color:#3b2f2f;max-width:420px;margin:15vh auto;padding:0 16px}
+input,button{font:inherit;width:100%;padding:12px;margin:6px 0;border-radius:12px;border:2px solid #e8dcc8}
+button{background:#2e9e6b;color:#fff;border:0}#m{color:#b36b00;min-height:1.4em}</style></head>
+<body><h1>Little Sinhala</h1><p>Private preview. Enter the passphrase.</p>
+<form id="f"><input id="p" type="password" autocomplete="current-password" placeholder="Passphrase" autofocus>
+<button>Unlock</button><div id="m"></div></form>
+<script>
+const SALT="iunQuFxdmw8=",DATA="cCCuRcZqosJgZz0gUc1+tOpSs9RAsPLDLWuLblQv1PRbg9s7U7uWcpJL1CuLlxDnJd20E7ArhQI41Qnlenylj/2gVzhx2QDVQJQ2XqvCzj7HDn3L8AZI/abyA1f5otHfM13ENh6IyLJXOYChq0B/scDf0p3HJ26i7jVbjuuQL/0B5MJGhKMtMqMcvyhfysWQYXzDNPAi9oTjQhtOUfBvBsGbQdJxI4VwIl2WxZ/18lGQ4u8jaOptNm94Y1wgEqNxhcQiRhKQfhx3sf6JAQc1Efo/QYSNPOuemkBirCfaP+3TT8H5HTJ049dURFjD2dnagwZKH/lc32di6+zeuDQEgnQ8K8/yv/68aXxOOdSSfqCDfv2WNhpDQepwZWYbJH/8/bFOn/BoPNo/uBv9ofm4+hHqcg5DItWzvBQHK6gm/iMHtLydGANgyJBsOU4gdwMeuSFSenMHBW5ZtYzfRXiUJE2b4JRVVf9mOvgsxh4CcLYJCtH3TAGFpKCJVcPocHeFe01T6sQ+XJJz0bfClfL8p+nxc1mk9WPQEE+b1IZwoLk5GqpEcx5Sunk3vI3nQfRThApOvW1nejEVqtsIcF6T0oeXni+lNU6/3YVUkb9xRz2CjgiVGcaS6U2ma3aTokLCEL9X06UjW9At3d6O08cmUjWySFsptVa7QCOr3rMxgXJ4KzLNiQskYICWczwdC+C1DBNfvnMsxhBz/7YoM9K/EWScgJ5U5hpMHBd1w/CKRXz9LaEJMvBsKxwTweSGUNWDqkzmZTGayxK+97xFe4kEwP5EqJ5KPaDshRsBXPe1aERMBV7J9JEm1hOOD+zZ+2kZ7BFN0DYWyQYSNuj1Dq6s/AXZx6zmXhWeRb3CIC77nDOVUCvahygfQrFYGQRw8J9P86RSigNwnWJ5ebZxLMmZTl0WqEtKA+o40ArPB4JOxzBjsrfeJrDm9yOiMtP+R7V0mmXzUVnmGvJ09ry1USN0RbTMjQptwR0kUHbC32BgjtLbjYqWkIB7IHv56rktt5acYRoDWZEwJr4o4MB834nj719XJU2QuEs7CZVkqHML0WYdcPJWwfyT8j0+WfBqTZPcNO3MnBSB73El6fX8+qw3qKM8Fedo8A3D0Oc3hz6eGWLoSKpvOWLoow01F13NLJnXRbHfJ1Ze9xvDFZHJUTeU2cBTElR9TPR8jGk4W6/z40qG78lizxeXMSq3XaWRpdj3gqIbr481lQJEyj/LDtQM9xYH3MR/Hb24N+dKcpc4IwS8XMVodj6q3mTIkRKNeWu+MTUoYdlnK+ipo7sXrUESDA==",ITER=600000;
+const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function open(pw){
+ const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveBits"]);
+ const bits=new Uint8Array(await crypto.subtle.deriveBits({name:"PBKDF2",salt:b(SALT),iterations:ITER,hash:"SHA-256"},k,384));
+ const key=await crypto.subtle.importKey("raw",bits.slice(0,32),"AES-CBC",false,["decrypt"]);
+ const plain=await crypto.subtle.decrypt({name:"AES-CBC",iv:bits.slice(32,48)},key,b(DATA));
+ return new TextDecoder().decode(plain)}
+async function go(pw){try{const h=await open(pw);sessionStorage.setItem("ls-pw",pw);document.open();document.write(h);document.close()}
+ catch(e){document.getElementById("m").textContent="That passphrase didn't work.";sessionStorage.removeItem("ls-pw")}}
+document.getElementById("f").onsubmit=e=>{e.preventDefault();go(document.getElementById("p").value)};
+const saved=sessionStorage.getItem("ls-pw");if(saved)go(saved);
+</script></body></html>
